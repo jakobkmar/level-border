@@ -11,5 +11,4 @@ dependencies {
         officialMojangMappings()
     })
     modImplementation("net.fabricmc:fabric-loader:0.12.11")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.44.0+1.18")
 }
