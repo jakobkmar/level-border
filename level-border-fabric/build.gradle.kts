@@ -4,6 +4,10 @@ plugins {
     id("io.github.juuxel.loom-quiltflower-mini") version "1.2.1"
 }
 
+repositories {
+    maven("https://maven.fabricmc.net/")
+}
+
 dependencies {
     minecraft("com.mojang:minecraft:1.18.1")
     mappings(loom.layered {
