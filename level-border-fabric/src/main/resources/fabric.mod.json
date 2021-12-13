@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "level-border",
+  "version": "${version}",
+  "description": "${description}",
+  "entrypoints": {
+    "main": ["net.axay.levelborder.LevelBorder"]
+  },
+  "mixins": ["levelborder.mixins.json"]
+}
