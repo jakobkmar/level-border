@@ -3,3 +3,7 @@
 
 # Gradle
 .gradle/
+build/
+
+# Fabric
+run/
