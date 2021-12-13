@@ -1,4 +1,5 @@
 plugins {
+    `java-script`
     id("fabric-loom") version "0.10-SNAPSHOT"
     id("org.quiltmc.quilt-mappings-on-loom") version "3.1.1"
     id("io.github.juuxel.loom-quiltflower-mini") version "1.2.1"
