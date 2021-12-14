@@ -15,7 +15,7 @@ public class ServerPlayerMixin {
         LevelBorderHandler.currentHandler.updateWorldBorder((ServerPlayer) (Object) this);
     }
 
-    @Inject(method = "setExperiencePoints", at = @At("RETURN"))
+    @Inject(method = "setExperienceLevels", at = @At("RETURN"))
     private void onSetLevel(int level, CallbackInfo ci) {
         LevelBorderHandler.currentHandler.updateWorldBorder((ServerPlayer) (Object) this);
     }
