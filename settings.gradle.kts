@@ -6,4 +6,5 @@ pluginManagement {
     }
 }
 
+include("${rootProject.name}-common")
 include("${rootProject.name}-fabric")
