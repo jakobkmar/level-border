@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class LevelBorderHandler {
+public abstract class LevelBorderHandler {
     public static LevelBorderHandler currentHandler;
 
     private final Map<UUID, WorldBorder> borders = new HashMap<>();
@@ -19,10 +19,12 @@ public class LevelBorderHandler {
         return Math.max(player.experienceLevel * 2.0D, 1.0D);
     }
 
+    protected abstract WorldBorder createWorldBorder(ServerPlayer player);
+
     public void initBorder(ServerPlayer player) {
         var border = borders.get(player.getUUID());
         if (border == null) {
-            border = new WorldBorder();
+            border = createWorldBorder(player);
             border.setCenter(0.5d, 0.5d);
             border.setSize(calculateSize(player));
             borders.put(player.getUUID(), border);
@@ -35,6 +37,13 @@ public class LevelBorderHandler {
         if (border != null) {
             border.lerpSizeBetween(border.getSize(), calculateSize(player), 2L * 1000L);
             player.connection.send(new ClientboundSetBorderLerpSizePacket(border));
+        }
+    }
+
+    public static class DefaultImpl extends LevelBorderHandler {
+        @Override
+        protected WorldBorder createWorldBorder(ServerPlayer player) {
+            return new WorldBorder();
         }
     }
 }

@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MinecraftServerMixin {
     @Inject(method = "runServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"))
     private void onInitServer(CallbackInfo ci) {
-        LevelBorderHandler.currentHandler = new LevelBorderHandler();
+        LevelBorderHandler.currentHandler = new LevelBorderHandler.DefaultImpl();
     }
 }

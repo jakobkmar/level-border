@@ -17,7 +17,7 @@ public class LevelBorderMod {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        LevelBorderHandler.currentHandler = new LevelBorderHandler();
+        LevelBorderHandler.currentHandler = new LevelBorderHandler.DefaultImpl();
     }
 
     @SubscribeEvent
