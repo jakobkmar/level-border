@@ -9,12 +9,12 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 public class ExperienceListener implements Listener {
     @EventHandler
-    private void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
         LevelBorderHandler.currentHandler.initBorder(((CraftPlayer) event.getPlayer()).getHandle());
     }
 
     @EventHandler
-    private void onChangeLevel(PlayerLevelChangeEvent event) {
+    public void onChangeLevel(PlayerLevelChangeEvent event) {
         LevelBorderHandler.currentHandler.updateWorldBorder(((CraftPlayer) event.getPlayer()).getHandle());
     }
 }
