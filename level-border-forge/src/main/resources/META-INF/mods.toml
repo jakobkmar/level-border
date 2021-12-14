@@ -1,0 +1,11 @@
+modLoader = "javafml"
+loaderVersion = "[39,)"
+license = "GNU General Public License v3.0"
+
+[[mods]]
+modId = "level-border"
+version = "${modVersion}"
+displayName = "Level = Border"
+logoFile = "examplemod.png"
+authors = "${modAuthor}"
+description = "${modDescription}"
