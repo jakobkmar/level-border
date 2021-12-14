@@ -4,6 +4,7 @@
   "version": "${modVersion}",
   "name": "${modName}",
   "description": "${modDescription}",
+  "license": "${modLicense}",
   "contact": {
     "homepage": "${websiteUrl}",
     "issues": "${issuesUrl}"

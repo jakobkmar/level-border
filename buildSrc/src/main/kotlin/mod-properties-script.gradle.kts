@@ -8,12 +8,13 @@ tasks {
     processResources {
         val modProps = linkedMapOf(
             "modId" to rootProject.name,
-            "modName" to "Level = Border",
+            "modName" to projectDisplayName,
             "modVersion" to project.version.toString(),
             "modAuthor" to author,
             "modDescription" to project.description.toString(),
+            "modLicense" to licenseName,
             "websiteUrl" to githubUrl,
-            "issuesUrl" to "$githubUrl/issues",
+            "issuesUrl" to issuesUrl,
             "minecraftVersion" to majorMinecraftVersion
         )
 
