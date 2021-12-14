@@ -14,7 +14,7 @@ tasks {
             "modDescription" to project.description.toString(),
             "websiteUrl" to githubUrl,
             "issuesUrl" to "$githubUrl/issues",
-            "minecraftVersion" to minecraftVersion
+            "minecraftVersion" to majorMinecraftVersion
         )
 
         inputs.properties(modProps)

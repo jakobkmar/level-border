@@ -4,10 +4,10 @@ plugins {
 }
 
 minecraft {
-    mappings("official", "1.18.1")
+    mappings("official", minecraftVersion)
 }
 
 dependencies {
     // version from https://files.minecraftforge.net/net/minecraftforge/forge/
-    minecraft ("net.minecraftforge:forge:1.18.1-39.0.5")
+    minecraft ("net.minecraftforge:forge:${minecraftVersion}-39.0.5")
 }

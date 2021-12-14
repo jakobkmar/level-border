@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    paperDevBundle("1.18.1-R0.1-SNAPSHOT")
+    paperDevBundle("${minecraftVersion}-R0.1-SNAPSHOT")
 }
 
 tasks {

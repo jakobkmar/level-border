@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.18.1")
+    minecraft("com.mojang:minecraft:$minecraftVersion")
     mappings(loom.layered {
         addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:1.18.1+build.1:v2"))
         officialMojangMappings()
