@@ -16,6 +16,10 @@ dependencies {
     implementation("net.fabricmc:fabric-loom:0.10-SNAPSHOT")
     implementation("io.github.juuxel:loom-quiltflower-mini:1.2.1")
     implementation("org.quiltmc:quilt-mappings-on-loom:3.1.2")
+
     implementation("io.papermc.paperweight.userdev:io.papermc.paperweight.userdev.gradle.plugin:1.3.2")
+    implementation("xyz.jpenilla:run-paper:1.0.6")
+    implementation("net.minecrell.plugin-yml.bukkit:net.minecrell.plugin-yml.bukkit.gradle.plugin:0.5.1")
+
     implementation("net.minecraftforge.gradle:ForgeGradle:5.1.+")
 }

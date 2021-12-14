@@ -1,6 +1,7 @@
 plugins {
     java
     id("io.papermc.paperweight.userdev")
+    id("xyz.jpenilla.run-paper")
 }
 
 dependencies {
