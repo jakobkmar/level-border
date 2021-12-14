@@ -2,7 +2,6 @@ package net.axay.levelborder.common;
 
 import net.minecraft.network.protocol.game.ClientboundInitializeBorderPacket;
 import net.minecraft.network.protocol.game.ClientboundSetBorderLerpSizePacket;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.border.WorldBorder;
@@ -14,17 +13,7 @@ import java.util.UUID;
 public class LevelBorderHandler {
     public static LevelBorderHandler currentHandler;
 
-    private final MinecraftServer server;
-
     private final Map<UUID, WorldBorder> borders = new HashMap<>();
-
-    public LevelBorderHandler(MinecraftServer server) {
-        this.server = server;
-    }
-
-    public void enable() {
-        server.getPlayerList().getPlayers().forEach(this::initBorder);
-    }
 
     private double calculateSize(Player player) {
         return Math.max(player.experienceLevel * 2.0D, 1.0D);
