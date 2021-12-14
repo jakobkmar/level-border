@@ -6,6 +6,7 @@
   },
   "mixins": [
     "MinecraftServerMixin",
-    "PlayerListMixin"
+    "PlayerListMixin",
+    "ServerPlayerMixin"
   ]
 }

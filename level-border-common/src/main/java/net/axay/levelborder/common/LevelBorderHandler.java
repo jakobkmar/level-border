@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.UUID;
 
 public class LevelBorderHandler {
+    public static LevelBorderHandler currentHandler;
+
     private final MinecraftServer server;
 
     private final Map<UUID, WorldBorder> borders = new HashMap<>();

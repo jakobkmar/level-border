@@ -1,6 +1,6 @@
 package net.axay.levelborder.mixin;
 
-import net.axay.levelborder.LevelBorderMod;
+import net.axay.levelborder.common.LevelBorderHandler;
 import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerListMixin {
     @Inject(method = "placeNewPlayer", at = @At("RETURN"))
     private void onPlacePlayer(Connection connection, ServerPlayer player, CallbackInfo ci) {
-        LevelBorderMod.handler.initBorder(player);
+        LevelBorderHandler.currentHandler.initBorder(player);
     }
 }
