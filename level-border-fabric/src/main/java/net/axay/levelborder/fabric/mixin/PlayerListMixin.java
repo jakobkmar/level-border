@@ -1,4 +1,4 @@
-package net.axay.levelborder.mixin;
+package net.axay.levelborder.fabric.mixin;
 
 import net.axay.levelborder.common.LevelBorderHandler;
 import net.minecraft.network.Connection;

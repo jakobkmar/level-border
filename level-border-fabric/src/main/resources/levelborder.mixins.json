@@ -1,5 +1,5 @@
 {
-  "package": "net.axay.levelborder.mixin",
+  "package": "net.axay.levelborder.fabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "injectors": {
     "defaultRequire": 1
