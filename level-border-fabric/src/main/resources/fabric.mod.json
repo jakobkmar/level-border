@@ -1,14 +1,22 @@
 {
   "schemaVersion": 1,
-  "id": "level-border",
-  "version": "${version}",
-  "name": "Level = Border",
-  "description": "${description}",
-  "authors": ["jakobkmar"],
-  "mixins": ["levelborder.mixins.json"],
+  "id": "${modId}",
+  "version": "${modVersion}",
+  "name": "${modName}",
+  "description": "${modDescription}",
+  "contact": {
+    "homepage": "${websiteUrl}",
+    "issues": "${issuesUrl}"
+  },
+  "authors": [
+    "${modAuthor}"
+  ],
+  "mixins": [
+    "levelborder.mixins.json"
+  ],
   "environment": "*",
   "depends": {
-    "minecraft": "1.18.x",
+    "minecraft": "${minecraftVersion}.x",
     "fabricloader": ">=0.8.7"
   }
 }

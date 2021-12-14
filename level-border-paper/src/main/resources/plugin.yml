@@ -1,0 +1,9 @@
+name: ${modId}
+version: ${modVersion}
+author: ${modAuthor}
+description: ${modDescription}
+website: ${websiteUrl}
+
+main: "net.axay.levelborder.paper.LevelBorderPlugin"
+
+api-version: ${minecraftVersion}

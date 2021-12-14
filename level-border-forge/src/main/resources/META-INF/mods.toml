@@ -3,9 +3,9 @@ loaderVersion = "[39,)"
 license = "GNU General Public License v3.0"
 
 [[mods]]
-modId = "level-border"
+modId = "${modId}"
 version = "${modVersion}"
-displayName = "Level = Border"
+displayName = "${modName}"
 logoFile = "examplemod.png"
 authors = "${modAuthor}"
 description = "${modDescription}"
