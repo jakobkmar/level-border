@@ -22,4 +22,7 @@ dependencies {
     implementation("net.minecrell.plugin-yml.bukkit:net.minecrell.plugin-yml.bukkit.gradle.plugin:0.5.1")
 
     implementation("net.minecraftforge.gradle:ForgeGradle:5.1.+")
+
+    implementation("org.spongepowered:vanillagradle:0.2")
+    implementation("org.spongepowered.plugin:org.spongepowered.plugin.gradle.plugin:0.9.0")
 }
