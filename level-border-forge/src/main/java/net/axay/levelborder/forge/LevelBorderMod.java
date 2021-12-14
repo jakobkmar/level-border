@@ -28,6 +28,13 @@ public class LevelBorderMod {
     }
 
     @SubscribeEvent
+    public void onPlayerJoin(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player) {
+            LevelBorderHandler.currentHandler.initBorder(player);
+        }
+    }
+
+    @SubscribeEvent
     public void onChangeLevel(PlayerXpEvent.LevelChange event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             LevelBorderHandler.currentHandler.updateWorldBorder(player);

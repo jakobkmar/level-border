@@ -22,13 +22,11 @@ public abstract class LevelBorderHandler {
     protected abstract WorldBorder createWorldBorder(ServerPlayer player);
 
     public void initBorder(ServerPlayer player) {
-        var border = borders.get(player.getUUID());
-        if (border == null) {
-            border = createWorldBorder(player);
-            border.setCenter(0.5d, 0.5d);
-            border.setSize(calculateSize(player));
-            borders.put(player.getUUID(), border);
-        }
+        final var border = createWorldBorder(player);
+        border.setCenter(0.5d, 0.5d);
+        border.setSize(calculateSize(player));
+        borders.put(player.getUUID(), border);
+
         player.connection.send(new ClientboundInitializeBorderPacket(border));
     }
 
