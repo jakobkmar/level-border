@@ -2,6 +2,13 @@
   "schemaVersion": 1,
   "id": "level-border",
   "version": "${version}",
+  "name": "Level = Border",
   "description": "${description}",
-  "mixins": ["levelborder.mixins.json"]
+  "authors": ["jakobkmar"],
+  "mixins": ["levelborder.mixins.json"],
+  "environment": "*",
+  "depends": {
+    "minecraft": "1.18.x",
+    "fabricloader": ">=0.8.7"
+  }
 }
