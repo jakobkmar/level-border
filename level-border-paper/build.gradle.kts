@@ -5,5 +5,5 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":${rootProject.name}-common"))
+    implementation(project(":${rootProject.name}-common", configuration = "namedElements"))
 }
