@@ -19,6 +19,7 @@ first-class support:
 
 also supports:
 
+- Sponge
 - Forge
 
 should also work with:
