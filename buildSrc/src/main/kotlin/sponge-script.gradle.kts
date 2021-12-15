@@ -1,16 +1,8 @@
 import org.spongepowered.gradle.plugin.config.PluginLoaders
-import org.spongepowered.gradle.vanilla.repository.MinecraftPlatform
 
 plugins {
     java
-    id("org.spongepowered.gradle.vanilla")
     id("org.spongepowered.gradle.plugin")
-}
-
-minecraft {
-    version("1.17.1")
-
-    platform(MinecraftPlatform.JOINED)
 }
 
 sponge {

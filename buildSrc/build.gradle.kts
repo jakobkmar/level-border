@@ -23,6 +23,5 @@ dependencies {
 
     implementation("net.minecraftforge.gradle:ForgeGradle:5.1.+")
 
-    implementation("org.spongepowered:vanillagradle:0.2")
     implementation("org.spongepowered.gradle.plugin:org.spongepowered.gradle.plugin.gradle.plugin:2.0.0")
 }
