@@ -9,5 +9,5 @@ minecraft {
 
 dependencies {
     // version from https://files.minecraftforge.net/net/minecraftforge/forge/
-    minecraft ("net.minecraftforge:forge:${minecraftVersion}-39.0.5")
+    minecraft("net.minecraftforge:forge:${minecraftVersion}-39.0.5")
 }
