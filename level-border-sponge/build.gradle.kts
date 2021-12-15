@@ -1,6 +1,7 @@
 plugins {
     `java-script`
     `sponge-script`
+    `shadow-script`
 }
 
 dependencies {

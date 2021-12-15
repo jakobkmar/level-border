@@ -25,5 +25,6 @@ dependencies {
 
     implementation("org.spongepowered.gradle.plugin:org.spongepowered.gradle.plugin.gradle.plugin:2.0.0")
 
+    implementation("gradle.plugin.com.github.johnrengelman:shadow:7.1.1")
     implementation("gradle.plugin.com.modrinth.minotaur:Minotaur:1.2.1")
 }

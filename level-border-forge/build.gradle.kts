@@ -2,7 +2,7 @@ plugins {
     `java-script`
     `forge-script`
     `mod-properties-script`
-    id("com.github.johnrengelman.shadow") version "7.1.0"
+    `shadow-script`
 }
 
 dependencies {
@@ -10,13 +10,3 @@ dependencies {
 }
 
 val modConfigFile by extra("META-INF/mods.toml")
-
-tasks {
-    shadowJar {
-        dependencies {
-            exclude {
-                it.moduleGroup != "net.axay"
-            }
-        }
-    }
-}
