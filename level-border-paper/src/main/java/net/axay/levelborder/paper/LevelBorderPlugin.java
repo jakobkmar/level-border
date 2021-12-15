@@ -2,6 +2,7 @@ package net.axay.levelborder.paper;
 
 import net.axay.levelborder.common.LevelBorderHandler;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,9 +12,11 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LevelBorderPlugin extends JavaPlugin implements Listener {
+    private LevelBorderHandler<ServerPlayer, WorldBorder> levelBorderHandler;
+
     @Override
     public void onLoad() {
-        LevelBorderHandler.currentHandler = new LevelBorderHandlerImpl();
+        levelBorderHandler = new PaperLevelBorderHandler();
     }
 
     @Override
@@ -27,16 +30,16 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        LevelBorderHandler.currentHandler.initBorder(toNormalPlayer(event.getPlayer()));
+        levelBorderHandler.initBorder(toNormalPlayer(event.getPlayer()));
     }
 
     @EventHandler
     public void onChangeWorld(PlayerChangedWorldEvent event) {
-        LevelBorderHandler.currentHandler.initBorder(toNormalPlayer(event.getPlayer()));
+        levelBorderHandler.initBorder(toNormalPlayer(event.getPlayer()));
     }
 
     @EventHandler
     public void onChangeLevel(PlayerLevelChangeEvent event) {
-        LevelBorderHandler.currentHandler.updateWorldBorder(toNormalPlayer(event.getPlayer()));
+        levelBorderHandler.updateWorldBorder(toNormalPlayer(event.getPlayer()));
     }
 }

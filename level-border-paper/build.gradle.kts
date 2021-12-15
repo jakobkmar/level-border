@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":${rootProject.name}-common", configuration = "namedElements"))
+    implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))
 }
 
 val modConfigFile by extra("plugin.yml")
