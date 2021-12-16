@@ -2,6 +2,7 @@ plugins {
     `java-script`
     `loom-script`
     `mod-properties-script`
+    `modrinth-script`
 }
 
 dependencies {
@@ -10,4 +11,15 @@ dependencies {
     include(implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))!!)
 }
 
-val modConfigFile by extra("fabric.mod.json")
+ext {
+    set("modConfigFile", "fabric.mod.json")
+    set("loaderNames", "Fabric")
+    set("loaderSlug", "fabric")
+}
+
+tasks {
+    named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
+        uploadFile = remapJar
+        addLoader("fabric")
+    }
+}

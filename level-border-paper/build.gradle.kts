@@ -3,10 +3,22 @@ plugins {
     `paper-script`
     `mod-properties-script`
     `shadow-script`
+    `modrinth-script`
 }
 
 dependencies {
     implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))
 }
 
-val modConfigFile by extra("plugin.yml")
+ext {
+    set("modConfigFile", "plugin.yml")
+    set("loaderNames", "Paper & Spigot")
+    set("loaderSlug", "paper")
+}
+
+tasks {
+    named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
+        uploadFile = shadowJar
+        addLoader("fabric")
+    }
+}

@@ -2,6 +2,7 @@ plugins {
     `java-script`
     `forge-script`
     `mod-properties-script`
+    `modrinth-script`
 }
 
 @Suppress("HasPlatformType")
@@ -11,4 +12,15 @@ dependencies {
     embed(implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))!!)
 }
 
-val modConfigFile by extra("META-INF/mods.toml")
+ext {
+    set("modConfigFile", "META-INF/mods.toml")
+    set("loaderNames", "Forge")
+    set("loaderSlug", "forge")
+}
+
+tasks {
+    named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
+        uploadFile = project.tasks.getByName("reobfJar")
+        addLoader("forge")
+    }
+}
