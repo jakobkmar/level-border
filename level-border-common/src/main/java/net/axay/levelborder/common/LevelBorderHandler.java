@@ -28,6 +28,12 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
         setCenter(border, spawn.x() + 0.5d, spawn.z() + 0.5d);
         initBorder(player, border, calculateSize(player));
         borders.put(getUUID(player), border);
+
+        for (Player onlinePlayer : getPlayers(player)) {
+            if (onlinePlayer != player) {
+                updateWorldBorder(onlinePlayer);
+            }
+        }
     }
 
     final public void updateWorldBorder(Player player) {
