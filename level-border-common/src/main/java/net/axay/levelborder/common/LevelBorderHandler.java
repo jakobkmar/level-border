@@ -37,6 +37,13 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
         }
     }
 
+    final public void checkOutsideBorder(Player player) {
+        final var border = borders.get(getUUID(player));
+        if (getDistance(player, border) + 5.0d < 0) {
+            hurt(player, 1f);
+        }
+    }
+
     final public void setMode(Player initiator, BorderMode mode) {
         this.mode = mode;
         getPlayers(initiator).forEach(this::updateWorldBorder);
@@ -50,7 +57,10 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
 
     abstract protected Collection<Player> getPlayers(Player player);
 
+    abstract protected double getDistance(Player player, WorldBorder border);
+
     abstract protected Pos3i sharedOverworldSpawn(Player player);
     abstract protected int getExperienceLevels(Player player);
     abstract protected UUID getUUID(Player player);
+    abstract protected void hurt(Player player, float damage);
 }

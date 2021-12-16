@@ -7,6 +7,7 @@ import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.cause.EventContext;
+import org.spongepowered.api.event.cause.entity.damage.source.DamageSources;
 import org.spongepowered.api.world.WorldBorder;
 
 import java.util.Collection;
@@ -41,6 +42,12 @@ public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBo
     }
 
     @Override
+    protected double getDistance(Player player, WorldBorder worldBorder) {
+        // TODO implement this for Sponge
+        return 1;
+    }
+
+    @Override
     protected Pos3i sharedOverworldSpawn(Player player) {
         final var pos = Sponge.getServer().getDefaultWorld().orElseThrow().getSpawnPosition();
         return new Pos3i(pos.getX(), pos.getY(), pos.getZ());
@@ -54,5 +61,10 @@ public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBo
     @Override
     protected UUID getUUID(Player player) {
         return player.getUniqueId();
+    }
+
+    @Override
+    protected void hurt(Player player, float damage) {
+        player.damage(damage, DamageSources.GENERIC);
     }
 }
