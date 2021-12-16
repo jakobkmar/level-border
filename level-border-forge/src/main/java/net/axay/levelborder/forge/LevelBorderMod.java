@@ -44,10 +44,12 @@ public class LevelBorderMod {
         if (event.getPlayer() instanceof ServerPlayer player) {
             final var pos = levelBorderHandler.getRespawnPos(player);
             player.teleportTo(
-                ((ServerPlayer) event.getPlayer()).server.overworld(),
+                player.server.overworld(),
                 pos.x(), pos.y(), pos.z(),
                 0f, 0f
             );
+
+            levelBorderHandler.initBorder(player);
         }
     }
 

@@ -47,8 +47,14 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        final var pos = levelBorderHandler.getRespawnPos(toVanillaPlayer(event.getPlayer()));
+        final var player = toVanillaPlayer(event.getPlayer());
+
+        final var pos = levelBorderHandler.getRespawnPos(player);
         event.setRespawnLocation(new Location(Bukkit.getWorld("world"), pos.x(), pos.y(), pos.z()));
+
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            levelBorderHandler.initBorder(player);
+        }, 20L);
     }
 
     @EventHandler
