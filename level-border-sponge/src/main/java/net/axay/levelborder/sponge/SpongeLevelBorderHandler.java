@@ -1,5 +1,6 @@
 package net.axay.levelborder.sponge;
 
+import net.axay.levelborder.common.BorderMode;
 import net.axay.levelborder.common.LevelBorderHandler;
 import net.axay.levelborder.common.Pos3i;
 import org.spongepowered.api.Server;
@@ -15,6 +16,19 @@ import java.util.Collection;
 import java.util.UUID;
 
 public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBorder, Server> {
+    private BorderMode borderMode;
+
+    @Override
+    public void setMode(BorderMode mode) {
+        this.borderMode = mode;
+        super.setMode(mode);
+    }
+
+    @Override
+    protected BorderMode getMode() {
+        return borderMode;
+    }
+
     @Override
     protected WorldBorder createWorldBorder(Player player) {
         return WorldBorder.builder().build();

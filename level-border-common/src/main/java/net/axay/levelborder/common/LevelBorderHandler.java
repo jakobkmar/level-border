@@ -8,11 +8,9 @@ import java.util.UUID;
 public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     private final Map<UUID, WorldBorder> borders = new HashMap<>();
 
-    private BorderMode mode = BorderMode.OWN;
-
     private double calculateSize(Player player) {
         final int experience;
-        if (mode == BorderMode.OWN) {
+        if (getMode() == BorderMode.OWN) {
             experience = getExperienceLevels(player);
         } else {
             experience = getPlayers().stream()
@@ -61,13 +59,14 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
         return sharedOverworldSpawn();
     }
 
-    final public void setMode(BorderMode mode) {
-        this.mode = mode;
+    public void setMode(BorderMode mode) {
         getPlayers().forEach(this::updateWorldBorder);
     }
 
-    protected abstract WorldBorder createWorldBorder(Player player);
-    protected abstract void setCenter(WorldBorder border, double centerX, double centerZ);
+    abstract protected BorderMode getMode();
+
+    abstract protected WorldBorder createWorldBorder(Player player);
+    abstract protected void setCenter(WorldBorder border, double centerX, double centerZ);
 
     abstract protected void initBorder(Player player, WorldBorder border, double size);
     abstract protected void interpolateBorder(Player player, WorldBorder border, double size, long time);

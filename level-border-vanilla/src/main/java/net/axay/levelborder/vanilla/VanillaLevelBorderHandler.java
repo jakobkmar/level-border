@@ -1,5 +1,6 @@
 package net.axay.levelborder.vanilla;
 
+import net.axay.levelborder.common.BorderMode;
 import net.axay.levelborder.common.LevelBorderHandler;
 import net.axay.levelborder.common.Pos3i;
 import net.minecraft.network.protocol.game.ClientboundInitializeBorderPacket;
@@ -13,6 +14,23 @@ import java.util.Collection;
 import java.util.UUID;
 
 public abstract class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, WorldBorder, MinecraftServer> {
+    @Override
+    public void setMode(BorderMode mode) {
+       var borderModeSavedData = getServer().overworld().getDataStorage()
+            .computeIfAbsent(BorderModeSavedData::load, BorderModeSavedData::new, "LevelBorder");
+       borderModeSavedData.borderMode = mode;
+       borderModeSavedData.setDirty();
+
+       super.setMode(mode);
+    }
+
+    @Override
+    protected BorderMode getMode() {
+        return getServer().overworld().getDataStorage()
+            .computeIfAbsent(BorderModeSavedData::load, BorderModeSavedData::new, "LevelBorder")
+            .borderMode;
+    }
+
     @Override
     protected WorldBorder createWorldBorder(ServerPlayer player) {
         return new WorldBorder();
