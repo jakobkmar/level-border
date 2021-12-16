@@ -20,6 +20,8 @@ ext {
 
 tasks {
     named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
+        dependsOn(jar)
+
         uploadFile = project.tasks.getByName("reobfJar")
         addLoader("forge")
     }
