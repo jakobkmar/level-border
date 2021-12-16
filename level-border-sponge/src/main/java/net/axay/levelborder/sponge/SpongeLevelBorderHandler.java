@@ -2,6 +2,7 @@ package net.axay.levelborder.sponge;
 
 import net.axay.levelborder.common.LevelBorderHandler;
 import net.axay.levelborder.common.Pos3i;
+import org.spongepowered.api.Server;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
@@ -13,7 +14,7 @@ import org.spongepowered.api.world.WorldBorder;
 import java.util.Collection;
 import java.util.UUID;
 
-public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBorder> {
+public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBorder, Server> {
     @Override
     protected WorldBorder createWorldBorder(Player player) {
         return WorldBorder.builder().build();
@@ -37,8 +38,13 @@ public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBo
     }
 
     @Override
-    protected Collection<Player> getPlayers(Player player) {
-        return Sponge.getServer().getOnlinePlayers();
+    protected Server getServer() {
+        return Sponge.getServer();
+    }
+
+    @Override
+    protected Collection<Player> getPlayers() {
+        return getServer().getOnlinePlayers();
     }
 
     @Override
@@ -48,8 +54,8 @@ public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBo
     }
 
     @Override
-    protected Pos3i sharedOverworldSpawn(Player player) {
-        final var pos = Sponge.getServer().getDefaultWorld().orElseThrow().getSpawnPosition();
+    protected Pos3i sharedOverworldSpawn() {
+        final var pos = getServer().getDefaultWorld().orElseThrow().getSpawnPosition();
         return new Pos3i(pos.getX(), pos.getY(), pos.getZ());
     }
 

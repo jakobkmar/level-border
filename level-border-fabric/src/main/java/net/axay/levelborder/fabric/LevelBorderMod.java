@@ -5,5 +5,5 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 
 public class LevelBorderMod {
-    public static LevelBorderHandler<ServerPlayer, WorldBorder> levelBorderHandler;
+    public static LevelBorderHandler<ServerPlayer, WorldBorder, ?> levelBorderHandler;
 }

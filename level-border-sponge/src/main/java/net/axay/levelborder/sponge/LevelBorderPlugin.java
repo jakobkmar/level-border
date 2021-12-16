@@ -12,7 +12,7 @@ import org.spongepowered.api.world.WorldBorder;
 
 @Plugin(id = "level-border")
 public class LevelBorderPlugin {
-    private LevelBorderHandler<Player, WorldBorder> levelBorderHandler;
+    private LevelBorderHandler<Player, WorldBorder, ?> levelBorderHandler;
 
     @Listener
     public void onServerStarting(GameStartingServerEvent event) {

@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 public class SpongeLevelBorderCommand {
     public static void register(Object plugin,
-                                Supplier<LevelBorderHandler<Player, ?>> levelBorderHandlerSupplier) {
+                                Supplier<LevelBorderHandler<Player, ?, ?>> levelBorderHandlerSupplier) {
         final var modeCommand = CommandSpec.builder()
             .arguments(
                 GenericArguments.onlyOne(
@@ -22,7 +22,6 @@ public class SpongeLevelBorderCommand {
             .executor((src, args) -> {
                 if (src instanceof Player player) {
                     levelBorderHandlerSupplier.get().setMode(
-                        player,
                         args.<BorderMode>getOne("mode").orElseThrow()
                     );
                 }

@@ -19,7 +19,7 @@ public class PlayerListMixin {
 
     @Inject(method = "respawn", at = @At("RETURN"))
     private void onRespawn(ServerPlayer player, boolean alive, CallbackInfoReturnable<ServerPlayer> cir) {
-        final var pos = LevelBorderMod.levelBorderHandler.getRespawnPos(player);
+        final var pos = LevelBorderMod.levelBorderHandler.getRespawnPos();
         player.teleportTo(player.server.overworld(), pos.x(), pos.y(), pos.z(), 0f, 0f);
     }
 }

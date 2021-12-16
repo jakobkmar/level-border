@@ -1,8 +1,8 @@
 package net.axay.levelborder.forge;
 
 import net.axay.levelborder.common.LevelBorderHandler;
+import net.axay.levelborder.vanilla.ModLevelBorderHandler;
 import net.axay.levelborder.vanilla.VanillaLevelBorderCommand;
-import net.axay.levelborder.vanilla.VanillaLevelBorderHandler;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod("levelborder")
 public class LevelBorderMod {
-    private LevelBorderHandler<ServerPlayer, WorldBorder> levelBorderHandler;
+    private LevelBorderHandler<ServerPlayer, WorldBorder, ?> levelBorderHandler;
 
     public LevelBorderMod() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -24,7 +24,7 @@ public class LevelBorderMod {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        levelBorderHandler = new VanillaLevelBorderHandler();
+        levelBorderHandler = new ModLevelBorderHandler(event.getServer());
     }
 
     @SubscribeEvent
@@ -42,7 +42,7 @@ public class LevelBorderMod {
     @SubscribeEvent
     public void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
-            final var pos = levelBorderHandler.getRespawnPos(player);
+            final var pos = levelBorderHandler.getRespawnPos();
             player.teleportTo(
                 player.server.overworld(),
                 pos.x(), pos.y(), pos.z(),

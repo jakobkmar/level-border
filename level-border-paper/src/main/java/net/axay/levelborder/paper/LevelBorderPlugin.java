@@ -14,7 +14,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LevelBorderPlugin extends JavaPlugin implements Listener {
-    private LevelBorderHandler<ServerPlayer, WorldBorder> levelBorderHandler;
+    private LevelBorderHandler<ServerPlayer, WorldBorder, ?> levelBorderHandler;
 
     @Override
     public void onLoad() {
@@ -46,7 +46,7 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         final var player = toVanillaPlayer(event.getPlayer());
 
-        final var pos = levelBorderHandler.getRespawnPos(player);
+        final var pos = levelBorderHandler.getRespawnPos();
         event.setRespawnLocation(new Location(Bukkit.getWorld("world"), pos.x(), pos.y(), pos.z()));
 
         Bukkit.getScheduler().runTaskLater(this, () -> {

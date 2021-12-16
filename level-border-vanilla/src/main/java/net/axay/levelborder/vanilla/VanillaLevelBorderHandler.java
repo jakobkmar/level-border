@@ -4,6 +4,7 @@ import net.axay.levelborder.common.LevelBorderHandler;
 import net.axay.levelborder.common.Pos3i;
 import net.minecraft.network.protocol.game.ClientboundInitializeBorderPacket;
 import net.minecraft.network.protocol.game.ClientboundSetBorderLerpSizePacket;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.border.WorldBorder;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.border.WorldBorder;
 import java.util.Collection;
 import java.util.UUID;
 
-public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, WorldBorder> {
+public abstract class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, WorldBorder, MinecraftServer> {
     @Override
     protected WorldBorder createWorldBorder(ServerPlayer player) {
         return new WorldBorder();
@@ -35,8 +36,8 @@ public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, 
     }
 
     @Override
-    protected Collection<ServerPlayer> getPlayers(ServerPlayer player) {
-        return player.server.getPlayerList().getPlayers();
+    protected Collection<ServerPlayer> getPlayers() {
+        return getServer().getPlayerList().getPlayers();
     }
 
     @Override
@@ -45,8 +46,8 @@ public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, 
     }
 
     @Override
-    protected Pos3i sharedOverworldSpawn(ServerPlayer player) {
-        final var pos = player.server.overworld().getSharedSpawnPos();
+    protected Pos3i sharedOverworldSpawn() {
+        final var pos = getServer().overworld().getSharedSpawnPos();
         return new Pos3i(pos.getX(), pos.getY(), pos.getZ());
     }
 

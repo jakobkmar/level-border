@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 public class VanillaLevelBorderCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher,
-                                Supplier<LevelBorderHandler<ServerPlayer, ?>> levelBorderHandlerSupplier) {
+                                Supplier<LevelBorderHandler<ServerPlayer, ?, ?>> levelBorderHandlerSupplier) {
         LiteralArgumentBuilder<CommandSourceStack> command = Commands.literal("levelborder")
             .requires(source -> source.hasPermission(2))
             .then(Commands.literal("mode")
@@ -26,7 +26,6 @@ public class VanillaLevelBorderCommand {
                     })
                     .executes(context -> {
                         levelBorderHandlerSupplier.get().setMode(
-                            context.getSource().getPlayerOrException(),
                             BorderMode.valueOf(context.getArgument("mode", String.class))
                         );
                         return 1;
