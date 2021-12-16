@@ -19,7 +19,9 @@ ext {
 
 tasks {
     named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
-        uploadFile = remapJar
+        dependsOn(build)
+
+        uploadFile = remapJar.get()
         addLoader("fabric")
     }
 }
