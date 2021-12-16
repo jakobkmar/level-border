@@ -12,10 +12,8 @@ import java.util.UUID;
 
 public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, WorldBorder> {
     @Override
-    protected WorldBorder createWorldBorder(ServerPlayer player, double centerX, double centerZ) {
-        final var border = new WorldBorder();
-        border.setCenter(centerX, centerZ);
-        return border;
+    protected WorldBorder createWorldBorder(ServerPlayer player) {
+        return new WorldBorder();
     }
 
     @Override
@@ -28,6 +26,11 @@ public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, 
     protected void interpolateBorder(ServerPlayer player, WorldBorder border, double size, long time) {
         border.lerpSizeBetween(border.getSize(), size, time);
         player.connection.send(new ClientboundSetBorderLerpSizePacket(border));
+    }
+
+    @Override
+    protected void setCenter(WorldBorder border, double centerX, double centerZ) {
+        border.setCenter(centerX, centerZ);
     }
 
     @Override

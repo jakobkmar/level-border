@@ -24,7 +24,8 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
     final public void initBorder(Player player) {
         final var spawn = sharedOverworldSpawn(player);
 
-        final var border = createWorldBorder(player, spawn.x() + 0.5d, spawn.z() + 0.5d);
+        final var border = createWorldBorder(player);
+        setCenter(border, spawn.x() + 0.5d, spawn.z() + 0.5d);
         initBorder(player, border, calculateSize(player));
         borders.put(getUUID(player), border);
     }
@@ -36,12 +37,13 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
         }
     }
 
-    public void setMode(Player initiator, BorderMode mode) {
+    final public void setMode(Player initiator, BorderMode mode) {
         this.mode = mode;
         getPlayers(initiator).forEach(this::updateWorldBorder);
     }
 
-    protected abstract WorldBorder createWorldBorder(Player player, double centerX, double centerZ);
+    protected abstract WorldBorder createWorldBorder(Player player);
+    protected abstract void setCenter(WorldBorder border, double centerX, double centerZ);
 
     abstract protected void initBorder(Player player, WorldBorder border, double size);
     abstract protected void interpolateBorder(Player player, WorldBorder border, double size, long time);

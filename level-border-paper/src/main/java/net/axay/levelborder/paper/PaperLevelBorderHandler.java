@@ -6,8 +6,8 @@ import net.minecraft.world.level.border.WorldBorder;
 
 public class PaperLevelBorderHandler extends VanillaLevelBorderHandler {
     @Override
-    protected WorldBorder createWorldBorder(ServerPlayer player, double centerX, double centerZ) {
-        var border = super.createWorldBorder(player, centerX, centerZ);
+    protected WorldBorder createWorldBorder(ServerPlayer player) {
+        var border = super.createWorldBorder(player);
         border.world = player.getLevel();
         return border;
     }
