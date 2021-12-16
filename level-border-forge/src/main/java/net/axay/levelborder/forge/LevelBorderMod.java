@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -29,6 +30,13 @@ public class LevelBorderMod {
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
         VanillaLevelBorderCommand.register(event.getDispatcher(), () -> levelBorderHandler);
+    }
+
+    @SubscribeEvent
+    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.player instanceof ServerPlayer player) {
+            levelBorderHandler.checkOutsideBorder(player);
+        }
     }
 
     @SubscribeEvent
