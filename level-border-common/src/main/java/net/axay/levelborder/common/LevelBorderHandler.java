@@ -12,12 +12,14 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
     }
 
     final public void initBorder(Player player) {
+        final var spawn = sharedOverworldSpawn(player);
+
         final var border = createWorldBorder(player);
-        initBorder(player, border, 0.5d, 0.5d, calculateSize(player));
+        initBorder(player, border, spawn.x() + 0.5d, spawn.z() + 0.5d, calculateSize(player));
         borders.put(getUUID(player), border);
     }
 
-    public void updateWorldBorder(Player player) {
+    final public void updateWorldBorder(Player player) {
         final var border = borders.get(getUUID(player));
         if (border != null) {
             interpolateBorder(player, border, calculateSize(player), 2L * 1000L);
@@ -29,6 +31,7 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
     abstract protected void initBorder(Player player, WorldBorder border, double posX, double posZ, double size);
     abstract protected void interpolateBorder(Player player, WorldBorder border, double size, long time);
 
+    abstract protected Pos3i sharedOverworldSpawn(Player player);
     abstract protected int getExperienceLevels(Player player);
     abstract protected UUID getUUID(Player player);
 }

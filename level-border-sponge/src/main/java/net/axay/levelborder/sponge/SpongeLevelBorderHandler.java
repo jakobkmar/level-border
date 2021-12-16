@@ -1,6 +1,8 @@
 package net.axay.levelborder.sponge;
 
 import net.axay.levelborder.common.LevelBorderHandler;
+import net.axay.levelborder.common.Pos3i;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.cause.Cause;
@@ -26,6 +28,12 @@ public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBo
     protected void interpolateBorder(Player player, WorldBorder worldBorder, double size, long time) {
         worldBorder.setDiameter(worldBorder.getDiameter(), size, time);
         player.setWorldBorder(worldBorder, Cause.builder().build(EventContext.builder().build()));
+    }
+
+    @Override
+    protected Pos3i sharedOverworldSpawn(Player player) {
+        final var pos = Sponge.getServer().getDefaultWorld().orElseThrow().getSpawnPosition();
+        return new Pos3i(pos.getX(), pos.getY(), pos.getZ());
     }
 
     @Override
