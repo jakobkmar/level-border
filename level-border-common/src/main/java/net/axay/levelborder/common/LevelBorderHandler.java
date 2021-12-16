@@ -16,7 +16,7 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
             experience = getExperienceLevels(player);
         } else {
             experience = getPlayers(player).stream()
-                    .map(this::getExperienceLevels).reduce(0, Integer::sum);
+                .map(this::getExperienceLevels).reduce(0, Integer::sum);
         }
         return Math.max(experience * 2.0D, 1.0D);
     }
@@ -34,6 +34,11 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
         if (border != null) {
             interpolateBorder(player, border, calculateSize(player), 2L * 1000L);
         }
+    }
+
+    public void setMode(Player initiator, BorderMode mode) {
+        this.mode = mode;
+        getPlayers(initiator).forEach(this::updateWorldBorder);
     }
 
     protected abstract WorldBorder createWorldBorder(Player player);

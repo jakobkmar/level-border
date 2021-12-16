@@ -1,9 +1,11 @@
 package net.axay.levelborder.paper;
 
 import net.axay.levelborder.common.LevelBorderHandler;
+import net.axay.levelborder.vanilla.VanillaLevelBorderCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
@@ -22,6 +24,10 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
+        VanillaLevelBorderCommand.register(
+            ((CraftServer) Bukkit.getServer()).getServer().vanillaCommandDispatcher.getDispatcher(),
+            levelBorderHandler
+        );
     }
 
     private ServerPlayer toVanillaPlayer(org.bukkit.entity.Player player) {

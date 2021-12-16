@@ -5,6 +5,7 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "CommandsMixin",
     "MinecraftServerMixin",
     "PlayerListMixin",
     "ServerPlayerMixin"
