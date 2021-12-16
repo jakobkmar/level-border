@@ -14,21 +14,20 @@ import java.util.UUID;
 
 public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBorder> {
     @Override
-    protected WorldBorder createWorldBorder(Player player) {
-        return WorldBorder.builder().build();
+    protected WorldBorder createWorldBorder(Player player, double centerX, double centerZ) {
+        return WorldBorder.builder().center(centerX, centerZ).build();
     }
 
     @Override
-    protected void initBorder(Player player, WorldBorder worldBorder, double posX, double posZ, double size) {
-        worldBorder.setCenter(posX, posZ);
-        worldBorder.setDiameter(size);
-        player.setWorldBorder(worldBorder, Cause.builder().build(EventContext.builder().build()));
+    protected void initBorder(Player player, WorldBorder border, double size) {
+        border.setDiameter(size);
+        player.setWorldBorder(border, Cause.builder().build(EventContext.builder().build()));
     }
 
     @Override
-    protected void interpolateBorder(Player player, WorldBorder worldBorder, double size, long time) {
-        worldBorder.setDiameter(worldBorder.getDiameter(), size, time);
-        player.setWorldBorder(worldBorder, Cause.builder().build(EventContext.builder().build()));
+    protected void interpolateBorder(Player player, WorldBorder border, double size, long time) {
+        border.setDiameter(border.getDiameter(), size, time);
+        player.setWorldBorder(border, Cause.builder().build(EventContext.builder().build()));
     }
 
     @Override

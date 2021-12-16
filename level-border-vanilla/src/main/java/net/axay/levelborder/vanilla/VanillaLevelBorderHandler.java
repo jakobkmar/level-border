@@ -12,13 +12,14 @@ import java.util.UUID;
 
 public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, WorldBorder> {
     @Override
-    protected WorldBorder createWorldBorder(ServerPlayer player) {
-        return new WorldBorder();
+    protected WorldBorder createWorldBorder(ServerPlayer player, double centerX, double centerZ) {
+        final var border = new WorldBorder();
+        border.setCenter(centerX, centerZ);
+        return border;
     }
 
     @Override
-    protected void initBorder(ServerPlayer player, WorldBorder border, double posX, double posZ, double size) {
-        border.setCenter(posX, posZ);
+    protected void initBorder(ServerPlayer player, WorldBorder border, double size) {
         border.setSize(size);
         player.connection.send(new ClientboundInitializeBorderPacket(border));
     }
