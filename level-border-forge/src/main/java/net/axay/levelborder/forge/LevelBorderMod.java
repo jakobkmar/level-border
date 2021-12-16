@@ -40,6 +40,18 @@ public class LevelBorderMod {
     }
 
     @SubscribeEvent
+    public void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player) {
+            final var pos = levelBorderHandler.getRespawnPos(player);
+            player.teleportTo(
+                ((ServerPlayer) event.getPlayer()).server.overworld(),
+                pos.x(), pos.y(), pos.z(),
+                0f, 0f
+            );
+        }
+    }
+
+    @SubscribeEvent
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             levelBorderHandler.initBorder(player);

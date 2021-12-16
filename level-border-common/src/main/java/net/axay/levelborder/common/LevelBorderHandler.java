@@ -46,6 +46,10 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
         }
     }
 
+    final public Pos3i getRespawnPos(Player player) {
+        return sharedOverworldSpawn(player);
+    }
+
     final public void setMode(Player initiator, BorderMode mode) {
         this.mode = mode;
         getPlayers(initiator).forEach(this::updateWorldBorder);

@@ -6,12 +6,14 @@ import net.axay.levelborder.vanilla.VanillaLevelBorderCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LevelBorderPlugin extends JavaPlugin implements Listener {
@@ -41,6 +43,12 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
         for (ServerPlayer player : ((CraftServer) Bukkit.getServer()).getServer().getPlayerList().getPlayers()) {
             levelBorderHandler.checkOutsideBorder(player);
         }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        final var pos = levelBorderHandler.getRespawnPos(toVanillaPlayer(event.getPlayer()));
+        event.setRespawnLocation(new Location(Bukkit.getWorld("world"), pos.x(), pos.y(), pos.z()));
     }
 
     @EventHandler
