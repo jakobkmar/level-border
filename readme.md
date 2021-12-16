@@ -3,12 +3,11 @@
 A cross-platform Mod for the popular Minecraft project, where the border always has a radius equal to the player's
 current experience level.
 
-![](images/readme_header.jpg)
+[![](https://raw.githubusercontent.com/jakobkmar/level-border/main/images/readme_header.jpg)](https://www.youtube.com/watch?v=Mu67I1qxYL8)
 
 ### Download
 
-level-border is available on [**Modrinth**](https://modrinth.com/mod/level-border) (recommended) and [Curseforge]()
-(only use it if you must).
+level-border can be downloaded [here on **Modrinth**](https://modrinth.com/mod/level-border/versions)
 
 ### Supported mod loaders
 
@@ -25,7 +24,7 @@ also supports:
 should also work with:
 
 - Spigot or Bukkit
-- clients which support mod loading, such as LabyMod
+- clients which support mod loading
 
 ### License
 
