@@ -86,6 +86,9 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     }
 
     public void setMode(BorderMode mode) {
+        if (mode == BorderMode.SHARED) {
+            shareExperience();
+        }
         updateForAll();
     }
 
