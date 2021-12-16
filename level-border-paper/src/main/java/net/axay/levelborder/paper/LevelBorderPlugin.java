@@ -24,22 +24,22 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
     }
 
-    private ServerPlayer toNormalPlayer(org.bukkit.entity.Player player) {
+    private ServerPlayer toVanillaPlayer(org.bukkit.entity.Player player) {
         return ((org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer) player).getHandle();
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        levelBorderHandler.initBorder(toNormalPlayer(event.getPlayer()));
+        levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()));
     }
 
     @EventHandler
     public void onChangeWorld(PlayerChangedWorldEvent event) {
-        levelBorderHandler.initBorder(toNormalPlayer(event.getPlayer()));
+        levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()));
     }
 
     @EventHandler
     public void onChangeLevel(PlayerLevelChangeEvent event) {
-        levelBorderHandler.updateWorldBorder(toNormalPlayer(event.getPlayer()));
+        levelBorderHandler.updateWorldBorder(toVanillaPlayer(event.getPlayer()));
     }
 }
