@@ -9,6 +9,7 @@ import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.cause.EventContext;
 import org.spongepowered.api.world.WorldBorder;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBorder> {
@@ -28,6 +29,11 @@ public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBo
     protected void interpolateBorder(Player player, WorldBorder worldBorder, double size, long time) {
         worldBorder.setDiameter(worldBorder.getDiameter(), size, time);
         player.setWorldBorder(worldBorder, Cause.builder().build(EventContext.builder().build()));
+    }
+
+    @Override
+    protected Collection<Player> getPlayers(Player player) {
+        return Sponge.getServer().getOnlinePlayers();
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.network.protocol.game.ClientboundSetBorderLerpSizePacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, WorldBorder> {
@@ -26,6 +27,11 @@ public class VanillaLevelBorderHandler extends LevelBorderHandler<ServerPlayer, 
     protected void interpolateBorder(ServerPlayer player, WorldBorder border, double size, long time) {
         border.lerpSizeBetween(border.getSize(), size, time);
         player.connection.send(new ClientboundSetBorderLerpSizePacket(border));
+    }
+
+    @Override
+    protected Collection<ServerPlayer> getPlayers(ServerPlayer player) {
+        return player.server.getPlayerList().getPlayers();
     }
 
     @Override
