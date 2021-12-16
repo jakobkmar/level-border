@@ -3,7 +3,7 @@ loaderVersion = "[39,)"
 license = "${modLicense}"
 
 [[mods]]
-modId = "${modId}"
+modId = "levelborder"
 version = "${modVersion}"
 displayName = "${modName}"
 logoFile = "examplemod.png"

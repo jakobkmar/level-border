@@ -14,7 +14,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod("level-border")
+@Mod("levelborder")
 public class LevelBorderMod {
     private LevelBorderHandler<ServerPlayer, WorldBorder> levelBorderHandler;
 
