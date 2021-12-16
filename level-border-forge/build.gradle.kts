@@ -2,11 +2,13 @@ plugins {
     `java-script`
     `forge-script`
     `mod-properties-script`
-    `shadow-script`
 }
 
+@Suppress("HasPlatformType")
+val embed by configurations.getting
+
 dependencies {
-    implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))
+    embed(implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))!!)
 }
 
 val modConfigFile by extra("META-INF/mods.toml")
