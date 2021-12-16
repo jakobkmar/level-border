@@ -5,7 +5,7 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.ChangeEntityExperienceEvent;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.world.WorldBorder;
@@ -15,8 +15,9 @@ public class LevelBorderPlugin {
     private LevelBorderHandler<Player, WorldBorder> levelBorderHandler;
 
     @Listener
-    public void onServerStart(GameStartedServerEvent event) {
+    public void onServerStarting(GameStartingServerEvent event) {
         levelBorderHandler = new SpongeLevelBorderHandler();
+        SpongeLevelBorderCommand.register(this, () -> levelBorderHandler);
     }
 
     @Listener
