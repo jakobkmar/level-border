@@ -17,7 +17,7 @@ public abstract class VanillaLevelBorderHandler extends LevelBorderHandler<Serve
     @Override
     public void setMode(BorderMode mode) {
        var borderModeSavedData = getServer().overworld().getDataStorage()
-            .computeIfAbsent(BorderModeSavedData::load, BorderModeSavedData::new, "LevelBorder");
+            .computeIfAbsent(BorderModeSavedData::load, BorderModeSavedData::new, "levelBorder");
        borderModeSavedData.borderMode = mode;
        borderModeSavedData.setDirty();
 
@@ -27,7 +27,7 @@ public abstract class VanillaLevelBorderHandler extends LevelBorderHandler<Serve
     @Override
     protected BorderMode getMode() {
         return getServer().overworld().getDataStorage()
-            .computeIfAbsent(BorderModeSavedData::load, BorderModeSavedData::new, "LevelBorder")
+            .computeIfAbsent(BorderModeSavedData::load, BorderModeSavedData::new, "levelBorder")
             .borderMode;
     }
 
