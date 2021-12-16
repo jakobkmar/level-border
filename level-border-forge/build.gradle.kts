@@ -22,7 +22,7 @@ tasks {
     named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
         dependsOn(jar)
 
-        uploadFile = project.tasks.getByName("reobfJar")
+        uploadFile = jar.get()
         addLoader("forge")
     }
 }
