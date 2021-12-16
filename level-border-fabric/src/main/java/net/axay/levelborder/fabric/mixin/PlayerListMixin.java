@@ -8,11 +8,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerList.class)
 public class PlayerListMixin {
     @Inject(method = "sendLevelInfo", at = @At("RETURN"))
     private void onPlacePlayer(ServerPlayer player, ServerLevel world, CallbackInfo ci) {
         LevelBorderMod.levelBorderHandler.initBorder(player);
+    }
+
+    @Inject(method = "respawn", at = @At("RETURN"))
+    private void onRespawn(ServerPlayer player, boolean alive, CallbackInfoReturnable<ServerPlayer> cir) {
+        final var pos = LevelBorderMod.levelBorderHandler.getRespawnPos(player);
+        player.teleportTo(player.server.overworld(), pos.x(), pos.y(), pos.z(), 0f, 0f);
     }
 }
