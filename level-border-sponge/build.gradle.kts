@@ -24,5 +24,9 @@ tasks {
 
         uploadFile = shadowJar.get()
         addLoader("forge")
+
+        // sponge is not on the latest version
+        gameVersions.clear()
+        addGameVersion("1.17.1")
     }
 }
