@@ -26,6 +26,11 @@ public class LevelBorderPlugin {
     }
 
     @Listener
+    public void onPlayerQuit(ClientConnectionEvent.Disconnect event) {
+        levelBorderHandler.onLeave(event.getTargetEntity());
+    }
+
+    @Listener
     public void onChangeWorld(MoveEntityEvent.Teleport event) {
         if (event.getFromTransform().getExtent() != event.getToTransform().getExtent()) {
             if (event.getTargetEntity() instanceof Player player) {

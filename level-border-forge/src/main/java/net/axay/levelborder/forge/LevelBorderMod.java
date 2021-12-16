@@ -61,6 +61,13 @@ public class LevelBorderMod {
     }
 
     @SubscribeEvent
+    public void onPlayerQuit(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player) {
+            levelBorderHandler.onLeave(player);
+        }
+    }
+
+    @SubscribeEvent
     public void onChangeWorld(PlayerEvent.PlayerChangedDimensionEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             levelBorderHandler.initBorder(player);

@@ -52,6 +52,11 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
         }
     }
 
+    final public void onLeave(Player player) {
+        borders.remove(getUUID(player));
+        getPlayers(player).forEach(this::updateWorldBorder);
+    }
+
     final public Pos3i getRespawnPos(Player player) {
         return sharedOverworldSpawn(player);
     }

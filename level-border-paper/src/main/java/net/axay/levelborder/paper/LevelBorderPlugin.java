@@ -10,10 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LevelBorderPlugin extends JavaPlugin implements Listener {
@@ -61,6 +58,13 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Bukkit.getScheduler().runTaskLater(this, () -> {
             levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()));
+        }, 20L);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            levelBorderHandler.onLeave(toVanillaPlayer(event.getPlayer()));
         }, 20L);
     }
 
