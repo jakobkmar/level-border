@@ -28,5 +28,8 @@ tasks {
         // sponge is not on the latest version
         gameVersions.clear()
         addGameVersion("1.17.1")
+
+        // sponge does not have all features
+        versionType = com.modrinth.minotaur.request.VersionType.BETA
     }
 }
