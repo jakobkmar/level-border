@@ -1,9 +1,6 @@
 package net.axay.levelborder.common;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     private final Map<UUID, WorldBorder> borders = new HashMap<>();
@@ -18,6 +15,10 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     }
 
     final public void initBorder(Player player) {
+        if (getMode() == BorderMode.SHARED) {
+            shareExperience();
+        }
+
         final var spawn = sharedOverworldSpawn();
 
         final var border = createWorldBorder(player);
@@ -34,12 +35,8 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
 
     final public void onChangeLevel(Player player) {
         if (getMode() == BorderMode.SHARED) {
-            final var experience = getPlayers().stream().map(this::getExperienceLevel)
-                .max(Integer::compare).orElse(0);
-            getPlayers().forEach(onlinePlayer -> {
-                setExperienceLevel(onlinePlayer, experience);
-                updateWorldBorder(onlinePlayer);
-            });
+            shareExperience();
+            updateForAll();
         } else {
             updateWorldBorder(player);
         }
@@ -63,15 +60,30 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
 
     final public void onLeave(Player player) {
         borders.remove(getUUID(player));
-        getPlayers().forEach(this::updateWorldBorder);
+        updateForAll();
     }
 
     final public Pos3i getRespawnPos() {
         return sharedOverworldSpawn();
     }
 
-    public void setMode(BorderMode mode) {
+    private void shareExperience() {
+        final var maxPlayer = getPlayers().stream()
+            .max(Comparator.comparingInt(this::getTotalExperience))
+            .orElseThrow();
+        for (Player player : getPlayers()) {
+            if (player != maxPlayer) {
+                copyExperience(player, maxPlayer);
+            }
+        }
+    }
+
+    private void updateForAll() {
         getPlayers().forEach(this::updateWorldBorder);
+    }
+
+    public void setMode(BorderMode mode) {
+        updateForAll();
     }
 
     abstract protected BorderMode getMode();
@@ -88,8 +100,12 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     abstract protected double getDistance(Player player, WorldBorder border);
 
     abstract protected Pos3i sharedOverworldSpawn();
+
+    abstract protected int getTotalExperience(Player player);
     abstract protected int getExperienceLevel(Player player);
-    abstract protected void setExperienceLevel(Player player, int level);
+
+    abstract protected void copyExperience(Player player, Player other);
+
     abstract protected UUID getUUID(Player player);
     abstract protected void hurt(Player player, float damage);
 }

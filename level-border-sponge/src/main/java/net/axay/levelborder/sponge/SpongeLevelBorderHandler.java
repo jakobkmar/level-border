@@ -74,13 +74,18 @@ public class SpongeLevelBorderHandler extends LevelBorderHandler<Player, WorldBo
     }
 
     @Override
+    protected int getTotalExperience(Player player) {
+        return player.get(Keys.TOTAL_EXPERIENCE).orElse(0);
+    }
+
+    @Override
     protected int getExperienceLevel(Player player) {
         return player.get(Keys.EXPERIENCE_LEVEL).orElse(0);
     }
 
     @Override
-    protected void setExperienceLevel(Player player, int level) {
-        player.offer(Keys.EXPERIENCE_LEVEL, level);
+    protected void copyExperience(Player player, Player other) {
+        player.offer(Keys.TOTAL_EXPERIENCE, other.get(Keys.TOTAL_EXPERIENCE).orElse(0));
     }
 
     @Override
