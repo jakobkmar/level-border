@@ -15,6 +15,10 @@ ext {
 }
 
 tasks {
+    shadowJar {
+        archiveClassifier.set("")
+    }
+
     named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
         dependsOn(shadowJar)
 
