@@ -1,10 +1,12 @@
 package net.axay.levelborder.paper;
 
+import com.destroystokyo.paper.event.server.ServerTickStartEvent;
 import net.axay.levelborder.common.LevelBorderHandler;
 import net.axay.levelborder.vanilla.VanillaLevelBorderCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
@@ -32,6 +34,13 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
 
     private ServerPlayer toVanillaPlayer(org.bukkit.entity.Player player) {
         return ((org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer) player).getHandle();
+    }
+
+    @EventHandler
+    public void onPlayerTick(ServerTickStartEvent event) {
+        for (ServerPlayer player : ((CraftServer) Bukkit.getServer()).getServer().getPlayerList().getPlayers()) {
+            levelBorderHandler.checkOutsideBorder(player);
+        }
     }
 
     @EventHandler

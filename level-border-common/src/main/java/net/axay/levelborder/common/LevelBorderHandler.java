@@ -39,8 +39,10 @@ public abstract class LevelBorderHandler<Player, WorldBorder> {
 
     final public void checkOutsideBorder(Player player) {
         final var border = borders.get(getUUID(player));
-        if (getDistance(player, border) + 5.0d < 0) {
-            hurt(player, 1f);
+        if (border != null) {
+            if (getDistance(player, border) + 5.0d < 0) {
+                hurt(player, 1f);
+            }
         }
     }
 
