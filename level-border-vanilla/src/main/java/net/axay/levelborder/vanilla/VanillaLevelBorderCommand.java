@@ -14,6 +14,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
@@ -37,6 +39,8 @@ public class VanillaLevelBorderCommand {
     }
 
     private static class BorderModeArgumentType implements ArgumentType<BorderMode> {
+        private static final Collection<String> EXAMPLES = Arrays.asList("OWN", "SHARED");
+
         @Override
         public BorderMode parse(StringReader reader) throws CommandSyntaxException {
             return BorderMode.valueOf(reader.readString());
@@ -48,6 +52,11 @@ public class VanillaLevelBorderCommand {
                 builder.suggest(value.name());
             }
             return builder.buildFuture();
+        }
+
+        @Override
+        public Collection<String> getExamples() {
+            return EXAMPLES;
         }
     }
 }
