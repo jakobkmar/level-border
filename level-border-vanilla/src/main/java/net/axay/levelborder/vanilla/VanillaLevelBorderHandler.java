@@ -70,8 +70,13 @@ public abstract class VanillaLevelBorderHandler extends LevelBorderHandler<Serve
     }
 
     @Override
-    protected int getExperienceLevels(ServerPlayer player) {
+    protected int getExperienceLevel(ServerPlayer player) {
         return player.experienceLevel;
+    }
+
+    @Override
+    protected void setExperienceLevel(ServerPlayer player, int level) {
+        player.experienceLevel = level;
     }
 
     @Override

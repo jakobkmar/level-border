@@ -77,7 +77,7 @@ public class LevelBorderMod {
     @SubscribeEvent
     public void onChangeLevel(PlayerXpEvent.LevelChange event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
-            levelBorderHandler.updateWorldBorder(player);
+            levelBorderHandler.onChangeLevel(player);
         }
     }
 }

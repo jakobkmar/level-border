@@ -9,13 +9,11 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     private final Map<UUID, WorldBorder> borders = new HashMap<>();
 
     private double calculateSize(Player player) {
-        final int experience;
-        if (getMode() == BorderMode.OWN) {
-            experience = getExperienceLevels(player);
-        } else {
-            experience = getPlayers().stream()
-                .map(this::getExperienceLevels).reduce(0, Integer::sum);
-        }
+        final int experience = switch (getMode()) {
+            case OWN, SHARED -> getExperienceLevel(player);
+            case SUM -> getPlayers().stream()
+                .map(this::getExperienceLevel).reduce(0, Integer::sum);
+        };
         return Math.max(experience * 2.0D, 1.0D);
     }
 
@@ -31,6 +29,19 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
             if (onlinePlayer != player) {
                 updateWorldBorder(onlinePlayer);
             }
+        }
+    }
+
+    final public void onChangeLevel(Player player) {
+        if (getMode() == BorderMode.SHARED) {
+            final var experience = getPlayers().stream().map(this::getExperienceLevel)
+                .max(Integer::compare).orElse(0);
+            getPlayers().forEach(onlinePlayer -> {
+                setExperienceLevel(onlinePlayer, experience);
+                updateWorldBorder(onlinePlayer);
+            });
+        } else {
+            updateWorldBorder(player);
         }
     }
 
@@ -77,7 +88,8 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     abstract protected double getDistance(Player player, WorldBorder border);
 
     abstract protected Pos3i sharedOverworldSpawn();
-    abstract protected int getExperienceLevels(Player player);
+    abstract protected int getExperienceLevel(Player player);
+    abstract protected void setExperienceLevel(Player player, int level);
     abstract protected UUID getUUID(Player player);
     abstract protected void hurt(Player player, float damage);
 }

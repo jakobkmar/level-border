@@ -12,16 +12,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ServerPlayerMixin {
     @Inject(method = "giveExperienceLevels", at = @At("RETURN"))
     private void onAddLevel(int levels, CallbackInfo ci) {
-        LevelBorderMod.levelBorderHandler.updateWorldBorder((ServerPlayer) (Object) this);
+        LevelBorderMod.levelBorderHandler.onChangeLevel((ServerPlayer) (Object) this);
     }
 
     @Inject(method = "setExperienceLevels", at = @At("RETURN"))
     private void onSetLevel(int level, CallbackInfo ci) {
-        LevelBorderMod.levelBorderHandler.updateWorldBorder((ServerPlayer) (Object) this);
+        LevelBorderMod.levelBorderHandler.onChangeLevel((ServerPlayer) (Object) this);
     }
 
     @Inject(method = "onEnchantmentPerformed", at = @At("RETURN"))
     private void onApplyEnchantmentCost(ItemStack enchantedItem, int experienceLevels, CallbackInfo ci) {
-        LevelBorderMod.levelBorderHandler.updateWorldBorder((ServerPlayer) (Object) this);
+        LevelBorderMod.levelBorderHandler.onChangeLevel((ServerPlayer) (Object) this);
     }
 }

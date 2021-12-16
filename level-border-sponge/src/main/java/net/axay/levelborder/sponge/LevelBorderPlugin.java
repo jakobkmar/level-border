@@ -43,7 +43,7 @@ public class LevelBorderPlugin {
     public void onChangeLevel(ChangeEntityExperienceEvent event) {
         if (event.getOriginalData().level().get().intValue() != event.getFinalData().level().get().intValue()) {
             if (event.getTargetEntity() instanceof Player player) {
-                levelBorderHandler.updateWorldBorder(player);
+                levelBorderHandler.onChangeLevel(player);
             }
         }
     }
