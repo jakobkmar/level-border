@@ -36,7 +36,9 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()));
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()));
+        }, 20L);
     }
 
     @EventHandler
