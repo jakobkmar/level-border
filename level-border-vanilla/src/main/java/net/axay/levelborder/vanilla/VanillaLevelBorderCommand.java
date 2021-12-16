@@ -43,6 +43,9 @@ public class VanillaLevelBorderCommand {
 
         @Override
         public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
+            for (BorderMode value : BorderMode.values()) {
+                builder.suggest(value.name());
+            }
             return builder.buildFuture();
         }
     }
