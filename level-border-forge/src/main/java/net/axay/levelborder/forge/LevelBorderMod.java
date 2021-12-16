@@ -28,7 +28,7 @@ public class LevelBorderMod {
 
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
-        VanillaLevelBorderCommand.register(event.getDispatcher(), levelBorderHandler);
+        VanillaLevelBorderCommand.register(event.getDispatcher(), () -> levelBorderHandler);
     }
 
     @SubscribeEvent

@@ -26,7 +26,7 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
         VanillaLevelBorderCommand.register(
             ((org.bukkit.craftbukkit.v1_18_R1.CraftServer) Bukkit.getServer())
                 .getServer().vanillaCommandDispatcher.getDispatcher(),
-            levelBorderHandler
+            () -> levelBorderHandler
         );
     }
 

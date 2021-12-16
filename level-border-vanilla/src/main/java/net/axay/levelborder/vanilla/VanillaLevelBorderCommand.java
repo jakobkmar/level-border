@@ -15,16 +15,17 @@ import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class VanillaLevelBorderCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher,
-                                LevelBorderHandler<ServerPlayer, ?> levelBorderHandler) {
+                                Supplier<LevelBorderHandler<ServerPlayer, ?>> levelBorderHandlerSupplier) {
         LiteralArgumentBuilder<CommandSourceStack> command = Commands.literal("levelborder")
             .requires(source -> source.hasPermission(2))
             .then(Commands.literal("mode")
                 .then(Commands.argument("mode", new BorderModeArgumentType())
                     .executes(context -> {
-                        levelBorderHandler.setMode(
+                        levelBorderHandlerSupplier.get().setMode(
                             context.getSource().getPlayerOrException(),
                             context.getArgument("mode", BorderMode.class)
                         );

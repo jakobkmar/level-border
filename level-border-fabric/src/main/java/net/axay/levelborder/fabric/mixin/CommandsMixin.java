@@ -25,6 +25,6 @@ public class CommandsMixin {
         )
     )
     public void onRegister(CallbackInfo ci) {
-        VanillaLevelBorderCommand.register(dispatcher, LevelBorderMod.levelBorderHandler);
+        VanillaLevelBorderCommand.register(dispatcher, () -> LevelBorderMod.levelBorderHandler);
     }
 }
