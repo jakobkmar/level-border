@@ -32,7 +32,7 @@ public class LevelBorderMod {
     }
 
     @SubscribeEvent
-    public void onPlayerJoin(PlayerEvent.PlayerChangedDimensionEvent event) {
+    public void onChangeWorld(PlayerEvent.PlayerChangedDimensionEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             levelBorderHandler.initBorder(player);
         }
