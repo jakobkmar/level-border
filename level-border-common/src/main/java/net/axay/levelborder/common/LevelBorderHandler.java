@@ -33,6 +33,12 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
         }
     }
 
+    final public void onChangeExperience() {
+        if (getMode() == BorderMode.SHARED) {
+            shareExperience();
+        }
+    }
+
     final public void onChangeLevel(Player player) {
         final var mode = getMode();
         if (mode != BorderMode.OWN) {

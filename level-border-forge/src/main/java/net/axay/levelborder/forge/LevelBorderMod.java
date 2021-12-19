@@ -80,4 +80,11 @@ public class LevelBorderMod {
             levelBorderHandler.onChangeLevel(player);
         }
     }
+
+    @SubscribeEvent
+    public void onChangePoints(PlayerXpEvent.XpChange event) {
+        if (event.getPlayer() instanceof ServerPlayer) {
+            levelBorderHandler.onChangeExperience();
+        }
+    }
 }

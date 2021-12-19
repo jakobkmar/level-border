@@ -43,10 +43,12 @@ public class LevelBorderPlugin {
     }
 
     @Listener
-    public void onChangeLevel(ChangeEntityExperienceEvent event) {
-        if (event.getOriginalData().level().get().intValue() != event.getFinalData().level().get().intValue()) {
-            if (event.getTargetEntity() instanceof Player player) {
+    public void onChangePoints(ChangeEntityExperienceEvent event) {
+        if (event.getTargetEntity() instanceof Player player) {
+            if (event.getOriginalData().level().get().intValue() != event.getFinalData().level().get().intValue()) {
                 levelBorderHandler.onChangeLevel(player);
+            } else {
+                levelBorderHandler.onChangeExperience();
             }
         }
     }

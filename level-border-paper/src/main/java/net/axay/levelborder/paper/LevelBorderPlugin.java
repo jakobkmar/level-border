@@ -77,4 +77,9 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
     public void onChangeLevel(PlayerLevelChangeEvent event) {
         levelBorderHandler.onChangeLevel(toVanillaPlayer(event.getPlayer()));
     }
+
+    @EventHandler
+    public void onChangePoints(PlayerExpChangeEvent event) {
+        levelBorderHandler.onChangeExperience();
+    }
 }
