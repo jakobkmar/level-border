@@ -7,6 +7,7 @@ import net.axay.levelborder.common.BorderMode;
 import net.axay.levelborder.common.LevelBorderHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.function.Supplier;
@@ -16,6 +17,13 @@ public class VanillaLevelBorderCommand {
                                 Supplier<LevelBorderHandler<ServerPlayer, ?, ?>> levelBorderHandlerSupplier) {
         LiteralArgumentBuilder<CommandSourceStack> command = Commands.literal("levelborder")
             .requires(source -> source.hasPermission(2))
+            .executes(context -> {
+                context.getSource().sendSuccess(new TextComponent(
+                    "You executed the base command of level-border. If you want to change some settings, continue with the subcommands."),
+                    true
+                );
+                return 1;
+            })
             .then(Commands.literal("mode")
                 .then(Commands.argument("mode", StringArgumentType.string())
                     .suggests((context, builder) -> {
