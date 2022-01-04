@@ -12,7 +12,7 @@ dependencies {
 
 ext {
     set("modConfigFile", "plugin.yml")
-    set("loaderNames", "Paper & Spigot")
+    set("loaderNames", "Paper")
     set("loaderSlug", "paper")
 }
 
