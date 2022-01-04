@@ -10,6 +10,7 @@ import org.spongepowered.api.event.entity.living.humanoid.player.RespawnPlayerEv
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.world.DimensionTypes;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.WorldBorder;
 
@@ -25,7 +26,10 @@ public class LevelBorderPlugin {
 
     @Listener
     public void onPlayerJoin(ClientConnectionEvent.Join event) {
-        levelBorderHandler.initBorder(event.getTargetEntity());
+        levelBorderHandler.initBorder(
+            event.getTargetEntity(),
+            event.getTargetEntity().getWorld().getDimension().getType() == DimensionTypes.NETHER
+        );
     }
 
     @Listener
@@ -37,7 +41,10 @@ public class LevelBorderPlugin {
     public void onChangeWorld(MoveEntityEvent.Teleport event) {
         if (event.getFromTransform().getExtent() != event.getToTransform().getExtent()) {
             if (event.getTargetEntity() instanceof Player player) {
-                levelBorderHandler.initBorder(player);
+                levelBorderHandler.initBorder(
+                    player,
+                    event.getToTransform().getExtent().getDimension().getType() == DimensionTypes.NETHER
+                );
             }
         }
     }

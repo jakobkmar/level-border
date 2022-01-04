@@ -7,7 +7,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
@@ -25,14 +27,18 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
         VanillaLevelBorderCommand.register(
-            ((org.bukkit.craftbukkit.v1_18_R1.CraftServer) Bukkit.getServer())
+            ((CraftServer) Bukkit.getServer())
                 .getServer().vanillaCommandDispatcher.getDispatcher(),
             () -> levelBorderHandler
         );
     }
 
-    private ServerPlayer toVanillaPlayer(org.bukkit.entity.Player player) {
+    private ServerPlayer toVanillaPlayer(Player player) {
         return ((org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer) player).getHandle();
+    }
+
+    private boolean isInNether(Player player) {
+        return player.getWorld().getEnvironment() == World.Environment.NETHER;
     }
 
     @EventHandler
@@ -57,7 +63,7 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Bukkit.getScheduler().runTaskLater(this, () -> {
-            levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()));
+            levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()), isInNether(event.getPlayer()));
         }, 20L);
     }
 
@@ -70,7 +76,7 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onChangeWorld(PlayerChangedWorldEvent event) {
-        levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()));
+        levelBorderHandler.initBorder(toVanillaPlayer(event.getPlayer()), isInNether(event.getPlayer()));
     }
 
     @EventHandler

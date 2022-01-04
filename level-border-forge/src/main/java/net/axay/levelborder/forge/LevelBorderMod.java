@@ -4,6 +4,7 @@ import net.axay.levelborder.common.LevelBorderHandler;
 import net.axay.levelborder.vanilla.ModLevelBorderHandler;
 import net.axay.levelborder.vanilla.VanillaLevelBorderCommand;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -56,7 +57,7 @@ public class LevelBorderMod {
     @SubscribeEvent
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
-            levelBorderHandler.initBorder(player);
+            levelBorderHandler.initBorder(player, player.getLevel().dimension() == Level.NETHER);
         }
     }
 
@@ -70,7 +71,7 @@ public class LevelBorderMod {
     @SubscribeEvent
     public void onChangeWorld(PlayerEvent.PlayerChangedDimensionEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
-            levelBorderHandler.initBorder(player);
+            levelBorderHandler.initBorder(player, event.getTo() == Level.NETHER);
         }
     }
 

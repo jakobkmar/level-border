@@ -15,11 +15,18 @@ public abstract class LevelBorderHandler<Player, WorldBorder, Server> {
     }
 
     final public void initBorder(Player player) {
+        initBorder(player, false);
+    }
+
+    final public void initBorder(Player player, boolean nether) {
         if (getMode() == BorderMode.SHARED) {
             shareExperience();
         }
 
-        final var spawn = sharedOverworldSpawn();
+        var spawn = sharedOverworldSpawn();
+        if (nether) {
+            spawn = spawn.div(8);
+        }
 
         final var border = createWorldBorder(player);
         setCenter(border, spawn.x() + 0.5d, spawn.z() + 0.5d);
