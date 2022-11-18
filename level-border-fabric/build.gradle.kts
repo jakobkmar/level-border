@@ -6,22 +6,11 @@ plugins {
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:0.12.11")
+    modImplementation("net.fabricmc:fabric-loader:0.14.10")
     include(implementation(project(":${rootProject.name}-common"))!!)
     include(implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))!!)
 }
 
-ext {
-    set("modConfigFile", "fabric.mod.json")
-    set("loaderNames", "Fabric")
-    set("loaderSlug", "fabric")
-}
-
-tasks {
-    named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
-        dependsOn(build)
-
-        uploadFile = remapJar.get()
-        addLoader("fabric")
-    }
+modrinth {
+    uploadFile.set(tasks.remapJar.get())
 }

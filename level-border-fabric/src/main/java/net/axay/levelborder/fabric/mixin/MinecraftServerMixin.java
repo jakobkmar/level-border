@@ -10,7 +10,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {
-    @Inject(method = "runServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"))
+
+    @Inject(
+        method = "runServer",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"
+        )
+    )
     private void onInitServer(CallbackInfo ci) {
         LevelBorderMod.levelBorderHandler = new ModLevelBorderHandler((MinecraftServer) (Object) this);
     }

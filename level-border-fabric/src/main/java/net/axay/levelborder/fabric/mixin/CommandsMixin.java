@@ -14,13 +14,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Commands.class)
 public class CommandsMixin {
+
     @Shadow @Final private CommandDispatcher<CommandSourceStack> dispatcher;
 
     @Inject(
         method = "<init>",
         at = @At(
             value = "INVOKE",
-            target = "Lcom/mojang/brigadier/CommandDispatcher;findAmbiguities(Lcom/mojang/brigadier/AmbiguityConsumer;)V",
+            target = "Lcom/mojang/brigadier/CommandDispatcher;setConsumer(Lcom/mojang/brigadier/ResultConsumer;)V",
             shift = At.Shift.BEFORE
         )
     )

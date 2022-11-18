@@ -9,27 +9,17 @@ dependencies {
     implementation(project(":${rootProject.name}-common"))
 }
 
-ext {
-    set("loaderNames", "Sponge")
-    set("loaderSlug", "sponge")
-}
-
 tasks {
     shadowJar {
         archiveClassifier.set("")
     }
+}
 
-    named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
-        dependsOn(shadowJar)
+modrinth {
+    uploadFile.set(tasks.shadowJar.get())
 
-        uploadFile = shadowJar.get()
-        addLoader("forge")
+    gameVersions.set(listOf("1.18.1"))
 
-        // sponge is not on the latest version
-        gameVersions.clear()
-        addGameVersion("1.17.1")
-
-        // sponge does not have all features
-        versionType = com.modrinth.minotaur.request.VersionType.BETA
-    }
+    // sponge does not have all features
+    versionType.set("beta")
 }

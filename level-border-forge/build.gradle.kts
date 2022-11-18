@@ -12,17 +12,6 @@ dependencies {
     embed(implementation(project(":${rootProject.name}-vanilla", configuration = "namedElements"))!!)
 }
 
-ext {
-    set("modConfigFile", "META-INF/mods.toml")
-    set("loaderNames", "Forge")
-    set("loaderSlug", "forge")
-}
-
-tasks {
-    named<com.modrinth.minotaur.TaskModrinthUpload>("uploadModrinth") {
-        dependsOn(jar)
-
-        uploadFile = jar.get()
-        addLoader("forge")
-    }
+modrinth {
+    uploadFile.set(tasks.jar.get())
 }

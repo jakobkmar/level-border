@@ -4,6 +4,6 @@ include("${rootProject.name}-common")
 include("${rootProject.name}-vanilla")
 
 include("${rootProject.name}-fabric")
-include("${rootProject.name}-forge")
+//include("${rootProject.name}-forge")
 include("${rootProject.name}-paper")
-include("${rootProject.name}-sponge")
+//include("${rootProject.name}-sponge")

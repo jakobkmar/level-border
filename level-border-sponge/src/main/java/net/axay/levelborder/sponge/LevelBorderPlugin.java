@@ -1,18 +1,19 @@
 package net.axay.levelborder.sponge;
 
 import net.axay.levelborder.common.LevelBorderHandler;
+import org.spongepowered.api.ResourceKey;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.ChangeEntityExperienceEvent;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
-import org.spongepowered.api.event.entity.living.humanoid.player.RespawnPlayerEvent;
+import org.spongepowered.api.event.entity.living.player.RespawnPlayerEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.world.DimensionTypes;
-import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.WorldBorder;
+import org.spongepowered.api.world.border.WorldBorder;
+import org.spongepowered.math.vector.Vector3d;
 
 @Plugin(id = "level-border")
 public class LevelBorderPlugin {
@@ -61,12 +62,13 @@ public class LevelBorderPlugin {
     }
 
     @Listener
-    public void onPlayerRespawn(RespawnPlayerEvent event) {
+    public void onPlayerRespawnSelectWorld(RespawnPlayerEvent.SelectWorld event) {
+        event.setDestinationWorld(Sponge.server().worldManager().world(ResourceKey.minecraft("world")).orElseThrow());
+    }
+
+    @Listener
+    public void onPlayerRespawnRecreate(RespawnPlayerEvent.Recreate event) {
         final var pos = levelBorderHandler.getRespawnPos();
-        final var loc = new Location<>(
-            Sponge.getServer().getWorld("world").orElseThrow(),
-            pos.x(), pos.y(), pos.z()
-        );
-        event.setToTransform(event.getToTransform().setLocation(loc));
+        event.setDestinationPosition(new Vector3d(pos.x(), pos.y(), pos.z()));
     }
 }

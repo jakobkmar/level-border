@@ -6,7 +6,7 @@ plugins {
 }
 
 sponge {
-    apiVersion("7.2.0")
+    apiVersion("9.0.0")
     license(licenseName)
     loader {
         name(PluginLoaders.JAVA_PLAIN)

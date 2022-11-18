@@ -8,7 +8,7 @@ import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,7 +34,7 @@ public class LevelBorderPlugin extends JavaPlugin implements Listener {
     }
 
     private ServerPlayer toVanillaPlayer(Player player) {
-        return ((org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer) player).getHandle();
+        return ((org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer) player).getHandle();
     }
 
     private boolean isInNether(Player player) {

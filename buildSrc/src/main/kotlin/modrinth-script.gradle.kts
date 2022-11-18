@@ -1,25 +1,18 @@
-import com.modrinth.minotaur.TaskModrinthUpload
-
 plugins {
     id("com.modrinth.minotaur")
 }
 
-tasks {
-    register<TaskModrinthUpload>("uploadModrinth") {
-        group = "upload"
-        onlyIf {
-            findProperty("modrinth.token") != null
-        }
+modrinth {
+    token.set(findProperty("modrinth.token").toString())
 
-        token = findProperty("modrinth.token").toString()
+    projectId.set("zyAuOrGS")
 
-        projectId = "zyAuOrGS"
+    versionName.set("Level Border [${findProperty("loaderNames")}] ${project.version}")
+    versionNumber.set("${project.version}-${modVersionType.name.toLowerCase()}-${findProperty("loaderSlug")}")
 
-        versionName = "Level Border [${ext.get("loaderNames")}] ${project.version} ${modVersionType.name.toLowerCase().capitalize()}"
-        versionNumber = "${project.version}-${modVersionType.name.toLowerCase()}-${ext.get("loaderSlug")}"
+    gameVersions.add(minecraftVersion)
+    versionType.set(modVersionType.name.toLowerCase())
+    detectLoaders.set(false)
 
-        addGameVersion(minecraftVersion)
-        versionType = modVersionType
-        detectLoaders = false
-    }
+    loaders.add(findProperty("loaderSlug").toString())
 }

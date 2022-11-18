@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerList.class)
 public class PlayerListMixin {
+
     @Inject(method = "sendLevelInfo", at = @At("RETURN"))
     private void onPlacePlayer(ServerPlayer player, ServerLevel world, CallbackInfo ci) {
         LevelBorderMod.levelBorderHandler.initBorder(player, world.dimension() == Level.NETHER);

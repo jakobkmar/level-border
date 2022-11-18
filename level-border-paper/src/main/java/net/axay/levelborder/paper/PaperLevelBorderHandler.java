@@ -16,6 +16,6 @@ public class PaperLevelBorderHandler extends VanillaLevelBorderHandler {
 
     @Override
     protected MinecraftServer getServer() {
-        return ((org.bukkit.craftbukkit.v1_18_R1.CraftServer) Bukkit.getServer()).getServer();
+        return ((org.bukkit.craftbukkit.v1_19_R1.CraftServer) Bukkit.getServer()).getServer();
     }
 }
